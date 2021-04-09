@@ -194,6 +194,7 @@ static NSString *const CHANNEL_NAME = @"flutter_webview_plugin";
 - (void)navigate:(FlutterMethodCall*)call {
     if (self.webview != nil) {
             NSString *url = call.arguments[@"url"];
+        if([url isKindOfClass:[NSString class]]){
             NSNumber *withLocalUrl = call.arguments[@"withLocalUrl"];
             if ( [withLocalUrl boolValue]) {
                 NSURL *htmlUrl = [NSURL fileURLWithPath:url isDirectory:false];
@@ -220,6 +221,8 @@ static NSString *const CHANNEL_NAME = @"flutter_webview_plugin";
                 [self.webview loadRequest:request];
             }
         }
+            
+    }
 }
 
 - (void)evalJavascript:(FlutterMethodCall*)call
@@ -366,7 +369,7 @@ static NSString *const CHANNEL_NAME = @"flutter_webview_plugin";
 
 - (bool)checkInvalidUrl:(NSURL*)url {
   NSString* urlString = url != nil ? [url absoluteString] : nil;
-  if (![_invalidUrlRegex isEqual:[NSNull null]] && urlString != nil) {
+  if (![_invalidUrlRegex isEqual:[NSNull null]] && urlString != nil && ![urlString isKindOfClass:NSNull.class]) {
     NSError* error = NULL;
     NSRegularExpression* regex =
         [NSRegularExpression regularExpressionWithPattern:_invalidUrlRegex

@@ -7,6 +7,8 @@ import 'package:flutter_webview_plugin/src/javascript_channel.dart';
 
 import 'base.dart';
 
+typedef CallBack = void Function(Map<String, dynamic> url);
+
 class WebviewScaffold extends StatefulWidget {
   const WebviewScaffold({
     Key key,
@@ -41,6 +43,7 @@ class WebviewScaffold extends StatefulWidget {
     this.geolocationEnabled,
     this.debuggingEnabled = false,
     this.ignoreSSLErrors = false,
+    this.launchCallback
   }) : super(key: key);
 
   final PreferredSizeWidget appBar;
@@ -74,6 +77,7 @@ class WebviewScaffold extends StatefulWidget {
   final bool useWideViewPort;
   final bool debuggingEnabled;
   final bool ignoreSSLErrors;
+  final CallBack launchCallback;
 
   @override
   _WebviewScaffoldState createState() => _WebviewScaffoldState();
@@ -113,10 +117,10 @@ class _WebviewScaffoldState extends State<WebviewScaffold> {
     if (widget.hidden) {
       _onStateChanged =
           webviewReference.onStateChanged.listen((WebViewStateChanged state) {
-        if (state.type == WebViewState.finishLoad) {
-          webviewReference.show();
-        }
-      });
+            if (state.type == WebViewState.finishLoad) {
+              webviewReference.show();
+            }
+          });
     }
   }
 
@@ -153,6 +157,9 @@ class _WebviewScaffoldState extends State<WebviewScaffold> {
         onRectChanged: (Rect value) {
           if (_rect == null) {
             _rect = value;
+            if(widget.launchCallback != null){
+              widget.launchCallback({'launchurl':widget.url});
+            }
             webviewReference.launch(
               widget.url,
               headers: widget.headers,
