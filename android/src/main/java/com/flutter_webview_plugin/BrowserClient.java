@@ -57,8 +57,11 @@ public class BrowserClient extends WebViewClient {
         FlutterWebviewPlugin.channel.invokeMethod("onUrlChanged", data);
 
         data.put("type", "finishLoad");
+        String title = view.getTitle();
+        if (title != null) {
+            data.put("title", title);
+        }
         FlutterWebviewPlugin.channel.invokeMethod("onState", data);
-
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
