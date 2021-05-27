@@ -35,6 +35,7 @@ import java.util.Date;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
+import io.flutter.Log;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 
@@ -264,6 +265,15 @@ class WebviewManager {
             public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
                 callback.invoke(origin, true, false);
             }
+
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                Log.e("========onReceiveTitle",title);
+
+                FlutterWebviewPlugin.channel.invokeMethod("onReceiveTitle", title);
+            }
+
         });
         registerJavaScriptChannelNames(channelNames);
     }
