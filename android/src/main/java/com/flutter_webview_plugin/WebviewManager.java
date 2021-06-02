@@ -20,6 +20,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.provider.MediaStore;
+import android.graphics.Bitmap;
 
 import androidx.core.content.FileProvider;
 
@@ -272,6 +273,13 @@ class WebviewManager {
                 Log.e("========onReceiveTitle",title);
 
                 FlutterWebviewPlugin.channel.invokeMethod("onReceiveTitle", title);
+            }
+            
+             @Nullable
+            @Override
+            public Bitmap getDefaultVideoPoster() {
+//                return super.getDefaultVideoPoster();
+                return Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
             }
 
         });
