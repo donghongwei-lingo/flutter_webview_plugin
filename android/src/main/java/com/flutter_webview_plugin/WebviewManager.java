@@ -275,7 +275,6 @@ class WebviewManager {
                 FlutterWebviewPlugin.channel.invokeMethod("onReceiveTitle", title);
             }
             
-             @Nullable
             @Override
             public Bitmap getDefaultVideoPoster() {
 //                return super.getDefaultVideoPoster();
