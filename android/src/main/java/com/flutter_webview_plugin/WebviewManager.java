@@ -420,6 +420,7 @@ class WebviewManager {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             webView.getSettings().setMediaPlaybackRequiresUserGesture(mediaPlaybackRequiresUserGesture);
         }
+        webView.getSettings().setMediaPlaybackRequiresUserGesture(false);
 
         // Handle debugging
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
