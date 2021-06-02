@@ -416,6 +416,7 @@ class WebviewManager {
 
         webView.getSettings().setUseWideViewPort(useWideViewPort);
         webView.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        webView.getSettings().setPluginState(WebSettings.PluginState.ON);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             webView.getSettings().setMediaPlaybackRequiresUserGesture(mediaPlaybackRequiresUserGesture);
         }
