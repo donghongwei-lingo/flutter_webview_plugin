@@ -270,10 +270,12 @@ class WebviewManager {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
+                Map<String, Object> args = new HashMap<>();
                 Log.e("========onReceiveTitle",title);
-
-                FlutterWebviewPlugin.channel.invokeMethod("onReceiveTitle", title);
+                args.put("title", title);
+                FlutterWebviewPlugin.channel.invokeMethod("onReceiveTitle", args);
             }
+
             
             @Override
             public Bitmap getDefaultVideoPoster() {
