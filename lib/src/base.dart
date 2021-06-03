@@ -83,7 +83,7 @@ class FlutterWebviewPlugin {
         _handleJavascriptChannelMessage(
             call.arguments['channel'], call.arguments['message']);
         break;
-      case '_onReceiveTitle':
+      case 'onReceiveTitle':
         _onReceiveTitle.add(call.arguments['title']);
         break;
     }
